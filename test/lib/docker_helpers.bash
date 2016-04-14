@@ -13,11 +13,6 @@ function docker_ip {
 	docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1
 }
 
-# get the ip of docker container $1
-function docker_id {
-	docker inspect --format '{{ .ID }}' $1
-}
-
 # get the running state of container $1
 # → true/false
 # fails if the container does not exist
@@ -62,5 +57,5 @@ function docker_tcp {
 		--expose 2375 \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		rancher/socat-docker
-	docker run --label bats-type="docker" --link "$container_name:docker" docker:1.9 version
+	docker run --label bats-type="docker" --link "$container_name:docker" docker:1.10 version
 }
